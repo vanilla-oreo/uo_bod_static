@@ -1,7 +1,5 @@
 # UO BOD 獎勵反查系統 v3（純 HTML + JSON）
 
-**不需要 PHP、SQLite、Node.js、API 或後台。** 網站部署只需要 `index.html` 和 `data/bod_data.json`；Python 僅用於本機更新 Excel / JSON。
-
 ## 已使用的 Excel 版本
 
 - 鐵匠：遊戲實測修正版（四張礦圖 600 / 850 / 950 / 1050 點）

@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light">
+<title>UO 工匠 BOD 獎勵反查系統</title>
+<style>
+:root{--ink:#193047;--muted:#60778b;--blue:#2563eb;--bg:#f3f7fc;--line:#dbe5f1;--green:#0d9470}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:ui-sans-serif,system-ui,"Microsoft JhengHei","Noto Sans TC",sans-serif;line-height:1.55}header{background:linear-gradient(120deg,#142c48,#23517e);padding:32px 20px 55px;color:white}header>div{max-width:1180px;margin:auto}.eyebrow{font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:#aaccfa;font-weight:700}h1{margin:6px 0;font-size:clamp(24px,3vw,34px)}header p{margin:6px 0 0;color:#d2e2f9;font-size:14px}main{max-width:1180px;margin:-31px auto 50px;padding:0 16px}.panel{background:white;border-radius:16px;box-shadow:0 10px 32px #18355514;border:1px solid var(--line)}.filters{padding:23px}.section-title{font-size:16px;font-weight:750;margin:0 0 16px}.formgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}label{display:block;font-size:13px;font-weight:700;color:#344b61;margin-bottom:6px}select,input{font-family:inherit;max-width:100%;width:100%;border:1px solid #cbd8e7;background:white;border-radius:9px;padding:10px 11px;min-height:44px;font-size:14px;color:#1e354c}select:focus,input:focus,button:focus{outline:3px solid #93c5fd;outline-offset:1px}select:disabled{background:#f2f4f7;color:#8b98a8}.details{margin-top:16px;display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap}.hint{font-size:13px;color:var(--muted)}button,.upload{display:inline-flex;justify-content:center;align-items:center;border:1px solid var(--line);border-radius:9px;background:white;font:600 13px inherit;cursor:pointer;padding:10px 15px;color:var(--ink)}button:hover,.upload:hover{background:#f4f8ff}button.primary{background:var(--blue);color:#fff;border-color:var(--blue)}button.primary:hover{background:#1d4ed8}.btnrow{display:flex;gap:8px;flex-wrap:wrap}.status{margin:16px 0;padding:10px 14px;border-radius:9px;border:1px solid #c7d7ec;background:#eaf2ff;font-size:13px;color:#34577d}.status.error{background:#fff1f1;color:#a52929;border-color:#f7cccc}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin:17px 0}.stat{padding:16px 18px;background:#fff;border-radius:13px;border:1px solid var(--line)}.stat small{display:block;color:var(--muted);font-size:12px}.stat b{font-size:26px;line-height:1.4;font-variant-numeric:tabular-nums}.results{overflow:hidden}.resulthead{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:17px 20px;border-bottom:1px solid var(--line)}.resulthead h2{font-size:16px;margin:0}.resulthead small{color:var(--muted)}table{border-collapse:collapse;width:100%;font-size:14px}thead th{background:#f8fafd;color:#4e647a;text-align:left;font-size:12px;font-weight:700;white-space:nowrap}td,th{padding:12px 14px;border-bottom:1px solid #e8eef5}tbody tr:hover{background:#f8fbff}td .sub{display:block;color:var(--muted);font-size:12px}.n{font-variant-numeric:tabular-nums;white-space:nowrap}.overshoot{display:inline-block;background:#e1f6ee;color:#087357;font-weight:750;padding:2px 8px;border-radius:999px}.empty{padding:45px 15px;text-align:center;color:var(--muted)}.foot{color:var(--muted);font-size:12px;padding:14px 20px;background:#f9fbfe}.loadmore{display:block;margin:15px auto 20px}.hidden{display:none!important}footer{text-align:center;color:var(--muted);font-size:12px;margin:30px 0 55px}.source{font-size:12px;word-break:break-all}.source a{color:#2765ba}.tip{margin-top:15px;border-left:3px solid #6da5fc;padding:8px 12px;background:#f2f7ff;font-size:12px;color:#45617d}@media(max-width:780px){.formgrid{grid-template-columns:repeat(2,minmax(0,1fr))}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.tablewrap{overflow-x:auto}table{min-width:790px}}@media(max-width:480px){.formgrid{grid-template-columns:1fr}.filters{padding:17px}.stat{padding:12px}.stat b{font-size:21px}}
+</style>
+</head>
+<body>
+<header><div><div class="eyebrow">ULTIMA ONLINE · BULK ORDER DEEDS</div><h1>工匠 BOD 獎勵反查系統 <span style="font-size:12px;color:#bed5f6;font-weight:400;vertical-align:middle">v3</span></h1><p>選擇獎勵後，訂單篩選選項會依可兌換條件連動，並將最接近門檻的訂單優先顯示。</p></div></header>
+<main>
+<section class="panel filters" aria-label="查詢條件">
+<h2 class="section-title">篩選獎勵與訂單</h2>
+<div class="formgrid">
+ <div><label for="job">① 工匠職業</label><select id="job"><option value="">載入中…</option></select></div>
+ <div><label for="reward">② 目標獎勵</label><select id="reward" disabled><option value="">請先選擇職業</option></select></div>
+ <div><label for="kind">訂單類型</label><select id="kind"><option value="">全部類型</option></select></div>
+ <div><label for="material">材料／類型</label><select id="material"><option value="">全部材料</option></select></div>
+ <div><label for="quality">品質</label><select id="quality"><option value="">全部品質</option></select></div>
+ <div><label for="qty">每種件數</label><select id="qty"><option value="">全部件數</option></select></div>
+</div>
+<div class="details"><span id="rewardDetail" class="hint">選擇獎勵後才會顯示查詢結果。</span><div class="btnrow"><button id="reset">清除條件</button><button id="csv" class="primary" disabled>匯出查詢 CSV</button></div></div>
+
+</section>
+<div id="status" class="status" role="status">正在讀取 data/bod_data.json …</div>
+<section class="stats" aria-live="polite"><div class="stat"><small>選定獎勵門檻</small><b id="target">—</b></div><div class="stat"><small>符合條件訂單</small><b id="matches">—</b></div><div class="stat"><small>最少多出點數</small><b id="waste">—</b></div><div class="stat"><small>目前職業訂單總數</small><b id="total">—</b></div></section>
+<section class="panel results"><div class="resulthead"><h2>可兌換訂單清單</h2><small>排序：超出門檻最少 → 訂單點數 → 訂單種類</small></div><div class="tablewrap"><table><thead><tr><th>排名</th><th>訂單種類</th><th>材料／類型</th><th>每種件數</th><th>品質</th><th>直接點數</th><th>超出門檻</th></tr></thead><tbody id="rows"><tr><td colspan="7" class="empty">請選擇一項獎勵</td></tr></tbody></table></div><button id="more" class="loadmore hidden">顯示更多訂單</button><div class="foot" id="info">點數門檻為遊戲獎勵兌換點數；符合門檻不代表製作材料最少，也不代表可以一次換多項獎勵。</div></section>
+<footer>資料以隨附 Excel 為準；鐵匠及抄錄採已確認的遊戲實測修正版。其餘依已核對或暫定官方資料。</footer>
+</main>
+<script>
+'use strict';
+const $=id=>document.getElementById(id);let db=null,job=null,results=[],shown=0;
+const fields=['kind','material','quality','qty'];
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const nf=n=>Number(n).toLocaleString('zh-TW');
+function options(id,arr,prompt,keep=''){const el=$(id);el.replaceChildren();const blank=document.createElement('option');blank.value='';blank.textContent=prompt;el.append(blank);for(const [value,label] of arr){const o=document.createElement('option');o.value=String(value);o.textContent=String(label);el.append(o)}if([...el.options].some(x=>x.value===keep))el.value=keep;}
+function setStatus(t,error=false){$('status').textContent=t;$('status').className='status'+(error?' error':'');}
+function load(obj){if(!obj||!Array.isArray(obj.jobs))throw Error('JSON 結構不符合：缺少 jobs 陣列');db=obj;options('job',db.jobs.map(x=>[x.slug,`${x.name} · ${x.english}`]),'選擇工匠職業','blacksmith');onJob();$('status').textContent=`資料已載入：${db.jobs.length} 個職業，${nf(db.jobs.reduce((a,j)=>a+j.orders.length,0))} 種訂單，${nf(db.jobs.reduce((a,j)=>a+j.rewards.length,0))} 項獎勵。`}
+function onJob(){
+ job=db?.jobs.find(j=>j.slug===$('job').value);
+ if(!job){options('reward',[],'請先選擇職業');$('reward').disabled=true;render();return}
+ const rewards=[...job.rewards].sort((a,b)=>a.points-b.points||a.name.localeCompare(b.name));
+ options('reward',rewards.map(r=>[r.id,`${r.name}（${nf(r.points)} 點）`]),'選擇要換的獎勵');
+ $('reward').disabled=false;
+ fields.forEach(id=>{selectedFilters[id]='';options(id,[],prompts[id]);});
+ refreshFilters();render();
+}
+function eligibleOrders(){
+ if(!job)return [];
+ const rw=job.rewards.find(r=>r.id===$('reward').value);
+ return rw?job.orders.filter(o=>Number(o.points)>=Number(rw.points)):job.orders;
+}
+// 依獎勵門檻先取得可兌換訂單。實際篩選永遠使用原始資料與目前選取值，
+// 不依賴 option 重建後的 DOM 狀態。
+const selectedFilters={kind:'',material:'',quality:'',qty:''};
+const prompts={kind:'全部類型',material:'全部材料',quality:'全部品質',qty:'全部件數'};
+const tierOrders={
+ blacksmith:['Iron','Dull Copper','Shadow Iron','Copper','Bronze','Gold','Agapite','Verite','Valorite'],
+ tinkering:['Iron','Dull Copper','Shadow Iron','Copper','Bronze','Gold','Agapite','Verite','Valorite'],
+ tailoring:['Cloth 布料','Normal Leather 普通皮','Spined Leather 棘皮','Horned Leather 角皮','Barbed Leather 刺皮'],
+ bowcraft:['Wood','Oak','Ash','Yew','Heartwood','Bloodwood','Frostwood'],
+ carpentry:['Wood','Oak','Ash','Yew','Heartwood','Bloodwood','Frostwood'],
+ inscription:['Inscription','All Inscription'],
+ alchemy:['Regular Alchemy','Alchemy','Nexus Core'],
+ cooking:['Cooking']
+};
+function sortOptions(id,values){
+ if(id==='qty')return values.sort((a,b)=>Number(a)-Number(b));
+ if(id==='quality'){
+  const order=['普通','正常','卓越','精良品'];
+  return values.sort((a,b)=>{const ia=order.indexOf(a),ib=order.indexOf(b);return (ia<0?999:ia)-(ib<0?999:ib)||a.localeCompare(b,'zh-Hant')});
+ }
+ if(id==='material'){
+  const levels=tierOrders[job?.slug]||[];
+  return values.sort((a,b)=>{const ia=levels.indexOf(a),ib=levels.indexOf(b);return (ia<0?999:ia)-(ib<0?999:ib)||a.localeCompare(b,'zh-Hant')});
+ }
+ return values.sort((a,b)=>a.localeCompare(b,'zh-Hant'));
+}
+function queryOrders(omit=''){
+ return eligibleOrders().filter(o=>fields.every(f=>f===omit||!selectedFilters[f]||String(o[f])===selectedFilters[f]));
+}
+function refreshFilters(changed=''){
+ if(!job)return;
+ // 修改某個條件時只清掉已不相容的後續選取值；不會因重畫 select 意外清除選取。
+ const current=eligibleOrders();
+ if(changed){
+  const idx=fields.indexOf(changed);
+  for(const f of fields.slice(idx+1)){
+   if(selectedFilters[f]&&!current.some(o=>fields.slice(0,idx+1).every(k=>!selectedFilters[k]||String(o[k])===selectedFilters[k])&&String(o[f])===selectedFilters[f]))selectedFilters[f]='';
+  }
+ }
+ for(const f of fields){
+  const available=queryOrders(f);
+  const values=sortOptions(f,[...new Set(available.map(o=>String(o[f]))) ]);
+  // 當交叉條件暫無結果時，仍提供符合獎勵門檻的選項，方便改選。
+  const choices=values.length?values:sortOptions(f,[...new Set(current.map(o=>String(o[f]))) ]);
+  options(f,choices.map(v=>[v,v]),prompts[f],selectedFilters[f]);
+  if(selectedFilters[f]&& !choices.includes(selectedFilters[f])){
+   selectedFilters[f]='';$(f).value='';
+  }
+ }
+}
+function render(){shown=0;const rw=job?.rewards.find(r=>r.id===$('reward').value);$('total').textContent=job?nf(job.orders.length):'—';$('target').textContent=rw?nf(rw.points):'—';$('rewardDetail').textContent=rw?`所選獎勵：${rw.name}｜門檻 ${nf(rw.points)} 點｜資料狀態：${job.status}`:'請選擇要兌換的獎勵。';
+ if(!job||!rw){results=[];$('matches').textContent='—';$('waste').textContent='—';$('csv').disabled=true;paint();return}
+ results=queryOrders().sort((a,b)=>(a.points-rw.points)-(b.points-rw.points)||a.points-b.points||a.kind.localeCompare(b.kind,'zh-Hant')||a.material.localeCompare(b.material,'zh-Hant'));
+ $('matches').textContent=nf(results.length);$('waste').textContent=results.length?'+'+nf(results[0].points-rw.points):'—';$('csv').disabled=results.length===0;paint();}
+function paint(){const rw=job?.rewards.find(r=>r.id===$('reward').value),el=$('rows');if(!rw||!results.length){el.innerHTML=`<tr><td colspan="7" class="empty">${rw?'沒有符合目前獎勵門檻與篩選條件的訂單，請選擇其他獎勵或清除篩選條件。':'請先選擇一項獎勵以開始搜尋。'}</td></tr>`;$('more').classList.add('hidden');return}const slice=results.slice(shown,shown+60);let html='';slice.forEach((o,i)=>{html+=`<tr><td class="n">${shown+i+1}</td><td>${esc(o.kind)}</td><td>${esc(o.material)}</td><td class="n">${nf(o.qty)}</td><td>${esc(o.quality)}</td><td class="n"><strong>${nf(o.points)}</strong></td><td class="n"><span class="overshoot">+${nf(o.points-rw.points)}</span></td></tr>`});if(shown===0)el.innerHTML=html;else el.insertAdjacentHTML('beforeend',html);shown+=slice.length;$('more').classList.toggle('hidden',shown>=results.length);$('more').textContent=`顯示更多訂單（已顯示 ${shown} / ${results.length}）`;}
+function downloadCSV(){const rw=job?.rewards.find(r=>r.id===$('reward').value);if(!rw||!results.length)return;const quoted=s=>'"'+String(s??'').replace(/"/g,'""')+'"';const arr=[['職業','獎勵','需求點數','訂單類型','材料／類型','每種件數','品質','直接點數','超出點數'],...results.map(o=>[job.name,rw.name,rw.points,o.kind,o.material,o.qty,o.quality,o.points,o.points-rw.points])];const csv='\uFEFF'+arr.map(r=>r.map(quoted).join(',')).join('\r\n');const blob=new Blob([csv],{type:'text/csv;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=`UO_BOD_${job.slug}_${rw.id}.csv`;document.body.append(a);a.click();a.remove();URL.revokeObjectURL(url);}
+$('job').addEventListener('change',onJob);$('reward').addEventListener('change',()=>{fields.forEach(f=>{selectedFilters[f]='';$(f).value='';});refreshFilters();render()});fields.forEach(id=>$(id).addEventListener('change',()=>{selectedFilters[id]=$(id).value;refreshFilters(id);render()}));$('more').addEventListener('click',paint);$('csv').addEventListener('click',downloadCSV);$('reset').addEventListener('click',()=>{if(job){$('reward').value='';fields.forEach(f=>{selectedFilters[f]='';$(f).value='';});refreshFilters()}render()});
+fetch('./data/bod_data.json?v=3',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('HTTP '+r.status);return r.json()}).then(load).catch(err=>setStatus('無法自動讀取 JSON：'+err.message+'。請使用 HTTP/HTTPS 網站（GitHub Pages 或主機），不要直接用 file:// 開啟 HTML。',true));
+</script>
+</body></html>
